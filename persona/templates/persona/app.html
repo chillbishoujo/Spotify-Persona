@@ -1,0 +1,357 @@
+{% load static %}
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{% static 'persona/persona.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'persona/persona.css' %}"/>
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{% static 'persona/jquery.waypoints.min.js' %}"></script>
+  <script>
+
+    beatCount = 1;
+    bpb = {{ time_signature }};
+
+    $(document).ready(function() {
+      $(".pButton").click(function() {
+        var music = $(this).parent().prev()[0];
+        if (music.paused) {
+          music.play();
+          $(this)[0].className = "pButton";
+          $(this)[0].className = "pause pButton";
+        } else {
+          music.pause();
+          $(this)[0].className = "pButton";
+          $(this)[0].className = "play pButton";
+        }
+      });
+
+      metro();
+
+      function fillBar() {
+        $(".hor-bar > .fill-in").each(function() {
+          $(this)
+          .data("origWidth", $(this).width())
+          .width(0)
+          .animate({
+            width: $(this).data("origWidth")
+          }, 1200);
+        });
+      }
+
+      function dropArrow() {
+        $(".line > .pointer").each(function() {
+          $(this)
+          .data("origPos", $(this).css("left"))
+          .css("left", 0)
+          .css("opacity", 0)
+          .animate({
+            left: $(this).data("origPos"),
+            opacity: 1
+          }, 1000);
+        });
+      }
+
+      $('.line').waypoint(function() {
+        dropArrow();
+        this.destroy();
+      }, {offset: '75%'});
+
+      $('.hor-bar').waypoint(function() {
+        fillBar();
+        this.destroy();
+      }, {offset: '100%'});
+
+    });
+
+    function metro() {
+      timeoutId = setTimeout("metro()", 60000/{{ tempo }});
+      if (beatCount == 1) {
+        $(".beat").last().css('opacity', '0.5');
+        $(".beat1").css('opacity', '1');
+      } else if (beatCount == 2) {
+        $(".beat1").css('opacity', '0.5')
+        $(".beat1").next().css('opacity', '1');
+      } else if (beatCount == 3) {
+        $(".beat1").next().css('opacity', '0.5');
+        $(".beat1").next().next().css('opacity', '1');
+      } else if (beatCount == 4) {
+        $(".beat1").next().next().css('opacity', '0.5');
+        $(".beat1").next().next().next().css('opacity', '1');
+      } else if (beatCount == 5) {
+        $(".beat1").next().next().next().css('opacity', '0.5');
+        $(".beat1").next().next().next().next().css('opacity', '1');
+      } else {
+        $(".beat1").next().next().next().next().css('opacity', '0.5');
+        $(".beat1").next().next().next().next().next().css('opacity', '1');
+      }
+      beatCount++;
+      if (beatCount > bpb) {
+        beatCount = 1;
+      }
+    }
+  </script>
+</head>
+<!-- <body>
+<p>{{ danceability }}</p>
+<p>{{ loudness }}</p>
+<p id="ya">{{ tempo }}</p>
+<p>{{ count }}</p>
+<p>{{ key }}</p>
+<p>{{ time_signature }}</p>
+<body> -->
+<body>
+  <header>
+    <h1>Spotify Persona</h1>
+  </header>
+  <div class="values danceability">
+    <div class="left audioplayer">
+      <audio class="audio_player">
+        <source src="{{ dance_pr }}"/>
+      </audio>
+      <div class="cover" style="background-image:url('{{ dance_img }}')">
+        <button class="play pButton">
+        </button>
+      </div>
+      <p>{{ dance_name }}</p>
+    </div>
+    <div class="right">
+      <div class="range">
+        <div class="line">
+          <div class="pointer" style="left: {{ danceability }}%"></div>
+        </div>
+        <div class="nums">
+          <div class="start">0.0</div>
+          <div class="end">1.0</div>
+        </div>
+      </div>
+      {% if danceability > 50 %}
+      <p class="norm">You listen to a ton of danceable music!</p>
+      {% else %}
+      <p class="norm">You don't listen to much danceable music</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="values loudness">
+    <div class="left audioplayer">
+      <audio class="audio_player">
+        <source src="{{ loud_pr }}"/>
+      </audio>
+      <div class="cover" style="background-image:url('{{ loud_img }}')">
+        <button class="play pButton">
+        </button>
+      </div>
+      <p>{{ loud_name }}</p>
+    </div>
+    <div class="right">
+      <div class="range">
+        <div class="line">
+          <div class="pointer" style="left: {{ loudness_p }}%"></div>
+        </div>
+        <div class="nums">
+          <div class="start">-60db</div>
+          <div class="end">0db</div>
+        </div>
+      </div>
+      {% if loudness_p > 50 %}
+      <p class="norm">You listen to a lot of LOUD music!</p>
+      {% else %}
+      <p class="norm">You listen to music on the quieter side</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="values energy">
+    <div class="left audioplayer">
+      <audio class="audio_player">
+        <source src="{{ energy_pr }}"/>
+      </audio>
+      <div class="cover" style="background-image:url('{{ energy_img }}')">
+        <button class="play pButton">
+        </button>
+      </div>
+      <p>{{ energy_name }}</p>
+    </div>
+    <div class="right">
+      <div class="range">
+        <div class="line">
+          <div class="pointer" style="left: {{ energy }}%"></div>
+        </div>
+        <div class="nums">
+          <div class="start">0.0</div>
+          <div class="end">1.0</div>
+        </div>
+      </div>
+        {% if energy > 50 %}
+        <p class="norm">Your songs have high energy!</p>
+        {% else %}
+        <p class="norm">Your songs have a calmer vibe</p>
+        {% endif %}
+    </div>
+  </div>
+  <div class="values speechiness">
+    <div class="left audioplayer">
+      <audio class="audio_player">
+        <source src="{{ speech_pr }}"/>
+      </audio>
+      <div class="cover" style="background-image:url('{{ speech_img }}')">
+        <button class="play pButton">
+        </button>
+      </div>
+      <p>{{ speech_name }}</p>
+    </div>
+    <div class="right">
+      <div class="range">
+        <div class="line">
+          <div class="pointer" style="left: {{ speechiness }}%"></div>
+        </div>
+        <div class="nums">
+          <div class="start">0.0</div>
+          <div class="end">1.0</div>
+        </div>
+      </div>
+      {% if speechiness > 66 %}
+      <p class="norm">You love hearing people speak!</p>
+      {% elif speechiness > 33 %}
+      <p class="norm">You dabble in the art of speech</p>
+      {% else %}
+      <p class="norm">You'd rather enjoy the sound of music than speech</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="values acousticness">
+    <div class="left audioplayer">
+      <audio class="audio_player">
+        <source src="{{ acoust_pr }}"/>
+      </audio>
+      <div class="cover" style="background-image:url('{{ acoust_img }}')">
+        <button class="play pButton">
+        </button>
+      </div>
+      <p>{{ acoust_name }}</p>
+    </div>
+    <div class="right">
+      <div class="range">
+        <div class="line">
+          <div class="pointer" style="left: {{ acousticness }}%"></div>
+        </div>
+        <div class="nums">
+          <div class="start">0.0</div>
+          <div class="end">1.0</div>
+        </div>
+      </div>
+      {% if acousticness > 50 %}
+      <p class="norm">You love the raw sound of instruments!</p>
+      {% else %}
+      <p class="norm">You like hearing digitalized music</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="values instrumentalness">
+    <div class="left">
+      {% if instrumentalness > 50 %}
+      <p class="precursor">You prefer the sound of instruments over vocalizing</p>
+      {% else %}
+      <p class="precursor">You love the sound of human voices</p>
+      {% endif %}
+      <div class="circ"></div>
+      <p class="stat">{{ instrumentalness }}%</p>
+    </div>
+    <div class="right">
+      <p class="exp">of your songs are instrumental!</p>
+    </div>
+  </div>
+  <div class="values liveness">
+    <div class="left">
+      {% if liveness > 50 %}
+      <p class="precursor">You love the sound of live audio!</p>
+      {% else %}
+      <p class="precursor">You live for clean-cut recordings</p>
+      {% endif %}
+      <div class="circ"></div>
+      <p class="stat">{{ liveness }}%</p>
+    </div>
+    <div class="right">
+      <p class="exp">of your tracks are live!</p>
+    </div>
+  </div>
+  <div class="values valence">
+    {% if valence %}
+      <img src="{% static 'persona/sad.png' %}"/>
+      <p class="val">You listen to a lot of negative-sounding songs</p>
+    {% else %}
+      <img src="{% static 'persona/happy.png' %}"/>
+      <p class="val">You love listening to songs brimming with positivity!</p>
+    {% endif %}
+  </div>
+  <div class="tempo">
+    <h2>Most songs you listen to have a beat like this</h2>
+    <div class="metronome">
+      {% if time_signature == 1 %}
+        <div class="beat1"></div>
+      {% elif time_signature == 2 %}
+        <div class="beat1"></div>
+        <div class="beat"></div>
+      {% elif time_signature == 3 %}
+        <div class="beat1"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+      {% elif time_signature == 4 %}
+        <div class="beat1"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+      {% elif time_signature == 5 %}
+        <div class="beat1"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+      {% elif time_signature == 6 %}
+        <div class="beat1"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+        <div class="beat"></div>
+      {% endif %}
+    </div>
+    <p class="bpm">BPM</p>
+    <p>{{ tempo }}</p>
+  </div>
+  <div class="keymode">
+    <p class="heading">{{ key }} {{ mode }}</p>
+    <p style="margin:0">is the key you listen to most often!</p>
+    <div class="key">
+      <div id="c" class="white"><div class="keys">{{ c }}% of tracks are in C</div></div>
+      <div id="df" class="black"><div class="keys">{{ cs }}% of tracks are in C#/D♭</div></div>
+      <div id="d" class="white"><div class="keys">{{ d }}% of tracks are in D</div></div>
+      <div id="ef" class="black"><div class="keys">{{ ds }}% of tracks are in D#/E♭</div></div>
+      <div id="e" class="white"><div class="keys">{{ e }}% of tracks are in E</div></div>
+      <div id="f" class="white"><div class="keys">{{ f }}% of tracks are in F</div></div>
+      <div id="gf" class="black"><div class="keys">{{ fs }}% of tracks are in F#/G♭</div></div>
+      <div id="g" class="white"><div class="keys">{{ g }}% of tracks are in G</div></div>
+      <div id="af" class="black"><div class="keys">{{ gs }}% of tracks are in G#/A♭</div></div>
+      <div id="a" class="white"><div class="keys">{{ a }}% of tracks are in A</div></div>
+      <div id="bf" class="black"><div class="keys">{{ bf }}% of tracks are in A#/B♭</div></div>
+      <div id="b" class="white"><div class="keys">{{ b }}% of tracks are in B</div></div>
+    </div>
+  </div>
+  <div class="popularity">
+    {% if popularity > 50 %}
+    <h2>You're popular!</h2>
+    {% else %}
+    <h2>You're a trendsetter!</h2>
+    {% endif %}
+    <div id="pop" class="hor-bar">
+      <div class="fill-in" style="width:{{ popularity }}%"></div>
+    </div>
+    <p>Or at least your music is</p>
+    <p>Your average song popularity is {{ popularity }} out of 100!</p>
+  </div>
+  <div class="values explicit">
+    <p class="tp">You shouldn't listen to</p>
+    <div class="circle">
+      <p class="explete">{{ explicit }}%</p>
+    </div>
+    <p class="btm">of your tracks around the young'uns</p>
+  </div>
+</body>

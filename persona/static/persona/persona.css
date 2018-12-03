@@ -1,0 +1,408 @@
+body {
+  background-color: black;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+div {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  height: 400px;
+}
+
+header {
+  padding: 10px;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: #FF1493;
+
+}
+
+h1 {
+
+  text-align: center;
+  width: 100%;
+  margin: 0;
+
+}
+
+h3 {
+
+  font-size: 44px;
+  text-align: left;
+  margin: 0;
+  display: inline-block;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+}
+
+.left {
+
+  width: 50%;
+  float: left;
+  padding: 0;
+
+}
+.audioplayer {
+  height: 100%;
+  display: inline;
+  padding: 0;
+}
+
+.right {
+
+  width: 50%;
+  float: right;
+  padding: 0;
+
+}
+
+.pButton {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  opacity: 0.1;
+  background-color: gray;
+  float: left;
+}
+
+.values {
+  position: relative;
+  padding: 0 5%;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 150px;
+}
+
+.metronome {
+
+  height: auto;
+  padding: 10px 0;
+  margin: 20px auto;
+
+}
+
+h2 {
+  margin: 0;
+}
+
+.beat, .beat1 {
+  border-radius: 50%;
+  height: 0;
+  width: 0;
+  padding: 20px;
+  margin: 15px;
+  background-color: white;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.hor-bar {
+
+  width: 60%;
+  border: 2px solid white;
+  margin: 0 auto;
+  padding: 0;
+  height: 40px;
+
+}
+
+.fill-in {
+
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: white;
+
+
+}
+
+.stat {
+
+  font-size: 8.5rem;
+  margin: 0 auto;
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0;
+
+}
+
+.circ {
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  padding-top: 50%;
+  border-radius: 50%;
+  background-color: #FF1493;
+  padding-bottom: 0;
+  height: 0;
+
+}
+
+.exp {
+
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  font-size: 2rem;
+
+}
+
+.instrumentalness .left, .instrumentalness .right, .liveness .left, .liveness .right {
+
+  position: relative;
+
+}
+
+.instrumentalness {
+
+}
+
+img {
+
+  height: 80%;
+
+}
+
+.mode {
+
+  font-size: 4rem;
+  background-color: #FF1493;
+  color: white;
+
+}
+
+.white {
+
+  background-color: #FF1493;
+  height: 30px;
+  margin-bottom: 2px;
+  text-align: left;
+  position: relative;
+  z-index: -1;
+
+}
+
+.black {
+  position: absolute;
+  height: 14px;
+  background-color: black;
+  width: 60%;
+  right: 0;
+}
+
+#df {
+  top: 11.5%;
+}
+
+#ef {
+  top: 25%;
+}
+
+#gf {
+  top: 51.5%;
+}
+
+#af {
+  top: 64.5%;
+}
+
+#bf {
+  top: 77.5%;
+}
+
+.key {
+  position: relative;
+  height: auto;
+}
+
+.keymode {
+
+  height: auto;
+
+}
+
+.keys {
+  text-align: left;
+  height: auto;
+  padding: 0;
+  width: auto;
+  position: absolute;
+  left: 6%;
+  top: 50%;
+  transform:translateY(-50%);
+}
+
+.heading {
+
+  font-size: 4rem;
+  margin: 0;
+
+}
+
+.cover {
+
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0;
+  border-radius: 2px;
+}
+
+.range {
+  width: 90%;
+  height: 20%;
+  margin: 0 auto;
+}
+
+.line {
+
+  width: 90%;
+  height: 100%;
+  padding: 0;
+  border-bottom: 2px solid #FF1493;
+  margin: 0 auto;
+  position: relative;
+
+}
+
+.pointer {
+
+  height: 30px;
+  width: 30px;
+  background-image: url("pointer.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: -20%;
+  transform: translate(-50%, -50%);
+
+}
+
+.nums {
+
+  padding: 0;
+  height: 100%;
+  position: relative;
+
+}
+
+.start {
+  height: auto;
+  width: auto;
+  position: absolute;
+  left: 0;
+}
+
+.end {
+  height: auto;
+  width: auto;
+  position: absolute;
+  right: 0;
+}
+
+.norm {
+  font-size: 2.5rem;
+  height: auto;
+  width: 90%;
+  margin: auto;
+  margin-top: 10%;
+  box-sizing: border-box;
+}
+
+.precursor {
+  position: absolute;
+  left: -30%;
+  z-index: 2;
+  top: 35%;
+  transform:translateX(50%);
+  font-size: 1.8rem;
+}
+
+.val {
+  height: 20%;
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+}
+
+.bpm {
+
+  width: 20%;
+  margin: 0 auto;
+  font-size: 2rem;
+  border-bottom: solid 2px #FF1493;
+
+}
+
+.explete {
+
+  font-size: 6rem;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.explicit {
+  position: relative;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  padding-top: 30%;
+  border-radius: 50%;
+  background-color: #FF1493;
+  padding-bottom: 0;
+  transform: translate(-50%, -50%);
+  height: 0;
+}
+
+.tp {
+
+  font-size: 1.6rem;
+  position: absolute;
+  z-index: 2;
+  top: 24%;
+  left: 24%;
+
+}
+
+.btm {
+
+  font-size: 1.6rem;
+  position: absolute;
+  z-index: 2;
+  top: 54%;
+  left: 50%;
+
+}
+
+.popularity {
+
+  margin-top: 150px;
+
+}

@@ -1,0 +1,9 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'persona/index.css' %}"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+</head>
+<body>
+<h1>Spotify Persona</h1>
+<button><a href="{% url 'persona:auth' %}">Click here to start</a></button>
+</body>
