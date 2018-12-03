@@ -5,8 +5,6 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
-from .models import Track, User
-
 def redirect_view(request):
     r = redirect('https://accounts.spotify.com/authorize?client_id=a4c7fa479a3e48bc95a742faa8485e0c&response_type=code&redirect_uri=http://127.0.0.1:8000/persona/app/&scope=user-read-private%20playlist-read-private%20playlist-read-collaborative%20user-top-read%20user-read-recently-played&state=34fFs29kd09&show_dialog=true')
     print(r.status_code)
