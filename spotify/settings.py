@@ -28,7 +28,7 @@ SECRET_KEY = 'wej+3s@1^40@lvb#-fvj2o+5z!=q^v2=r%bzf27t-8zrbbm_nt'
 # DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://sheltered-atoll-69729.herokuapp.com']
 
 
 # Application definition
